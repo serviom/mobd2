@@ -11,6 +11,7 @@ class __TwigTemplate_f9505f3a19b656fc89c99a68541c0d2e extends Twig_Template
 
         $this->blocks = array(
             'title' => array($this, 'block_title'),
+            'javascripts' => array($this, 'block_javascripts'),
             'body' => array($this, 'block_body'),
         );
     }
@@ -31,28 +32,49 @@ class __TwigTemplate_f9505f3a19b656fc89c99a68541c0d2e extends Twig_Template
         echo "Welcome || mobd";
     }
 
-    // line 4
+    // line 5
+    public function block_javascripts($context, array $blocks = array())
+    {
+        // line 6
+        echo "    ";
+        $this->displayParentBlock("javascripts", $context, $blocks);
+        echo "  
+    <script type=\"text/javascript\" src=\"";
+        // line 7
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/fb.js"), "html", null, true);
+        echo "\"></script>
+    <script type=\"text/javascript\" src=\"//connect.facebook.net/en_US/all.js\"></script>
+    <script type=\"text/javascript\">
+      function login() {
+        FB.login(function(response) {
+            if (response.authResponse) {
+               window.location.href='/mobd/auth';
+            } 
+        });
+      }
+    </script>
+";
+    }
+
+    // line 21
     public function block_body($context, array $blocks = array())
     {
-        // line 5
+        // line 22
         echo "    <div id=\"fb-root\"></div>
-    <div id=\"fb-root\"></div>
     <div class=\"main\">
     <header>
       <div class=\"logo\">
-        <a href=\"";
-        // line 10
-        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getUrl("_auth"), "html", null, true);
-        echo "\"><img src=\"";
+        <img src=\"";
+        // line 26
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("images/logo.png"), "html", null, true);
-        echo "\"></a>
+        echo "\">
       </div>
     </header>
     <div class=\"connect\">
-      <img src=\"";
-        // line 14
+      <a onclick=\"login();\" href=\"#\"><img  src=\"";
+        // line 30
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("images/fb.jpg"), "html", null, true);
-        echo "\">
+        echo "\"></a>
     </div>
     </div>
 ";
@@ -70,6 +92,6 @@ class __TwigTemplate_f9505f3a19b656fc89c99a68541c0d2e extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  52 => 14,  43 => 10,  36 => 5,  33 => 4,  27 => 3,);
+        return array (  74 => 30,  67 => 26,  61 => 22,  58 => 21,  42 => 7,  37 => 6,  34 => 5,  28 => 3,);
     }
 }

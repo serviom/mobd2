@@ -164,18 +164,18 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         if (0 === strpos($pathinfo, '/mobd')) {
             // index
-            if ($pathinfo === '/mobd/user') {
-                return array (  '_controller' => 'Lezgro\\MobdBundle\\Controller\\UserController::indexAction',  '_route' => 'index',);
+            if (0 === strpos($pathinfo, '/mobd/user') && preg_match('#^/mobd/user/(?<fbid>[^/]+)/(?<token>[^/]+)$#s', $pathinfo, $matches)) {
+                return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Lezgro\\Mobd2Bundle\\Controller\\UserController::userAction',)), array('_route' => 'index'));
             }
 
             // _auth
             if ($pathinfo === '/mobd/auth') {
-                return array (  '_controller' => 'Lezgro\\MobdBundle\\Controller\\UserController::authAction',  '_route' => '_auth',);
+                return array (  '_controller' => 'Lezgro\\Mobd2Bundle\\Controller\\UserController::authAction',  '_route' => '_auth',);
             }
 
             // _migration
             if ($pathinfo === '/mobd/migration') {
-                return array (  '_controller' => 'Lezgro\\MobdBundle\\Controller\\UserController::migrationAction',  '_route' => '_migration',);
+                return array (  '_controller' => 'Lezgro\\Mobd2Bundle\\Controller\\UserController::migrationAction',  '_route' => '_migration',);
             }
 
         }

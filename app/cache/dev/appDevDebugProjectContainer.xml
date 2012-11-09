@@ -20,7 +20,7 @@
       <parameter key="JMSDiExtraBundle">JMS\DiExtraBundle\JMSDiExtraBundle</parameter>
       <parameter key="JMSSecurityExtraBundle">JMS\SecurityExtraBundle\JMSSecurityExtraBundle</parameter>
       <parameter key="ApplicationHelloBundle">Application\HelloBundle\ApplicationHelloBundle</parameter>
-      <parameter key="LezgroMobdBundle">Lezgro\MobdBundle\LezgroMobdBundle</parameter>
+      <parameter key="LezgroMobd2Bundle">Lezgro\Mobd2Bundle\LezgroMobd2Bundle</parameter>
       <parameter key="AcmeDemoBundle">Acme\DemoBundle\AcmeDemoBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
@@ -115,7 +115,9 @@
     <parameter key="validator.mapping.loader.xml_files_loader.mapping_files" type="collection">
       <parameter>D:\WebServer\home\symfony2\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/config/validation.xml</parameter>
     </parameter>
-    <parameter key="validator.mapping.loader.yaml_files_loader.mapping_files" type="collection"/>
+    <parameter key="validator.mapping.loader.yaml_files_loader.mapping_files" type="collection">
+      <parameter>D:\WebServer\home\symfony2\src\Lezgro\Mobd2Bundle\Resources\config\validation.yml</parameter>
+    </parameter>
     <parameter key="profiler.class">Symfony\Component\HttpKernel\Profiler\Profiler</parameter>
     <parameter key="profiler_listener.class">Symfony\Component\HttpKernel\EventListener\ProfilerListener</parameter>
     <parameter key="data_collector.config.class">Symfony\Component\HttpKernel\DataCollector\ConfigDataCollector</parameter>
@@ -461,7 +463,7 @@
     <parameter key="jms_di_extra.cache_dir">D:/WebServer/home/symfony2/app/cache/dev/jms_diextra</parameter>
     <parameter key="jms_di_extra.doctrine_integration">true</parameter>
     <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">D:/WebServer/home/symfony2/app/cache/dev/jms_diextra/doctrine/EntityManager.php</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EM5093d6f3a89a0_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EM509cf8364eca1_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
     <parameter key="security.secured_services" type="collection"/>
     <parameter key="security.access.method_interceptor.class">JMS\SecurityExtraBundle\Security\Authorization\Interception\MethodSecurityInterceptor</parameter>
     <parameter key="security.access.method_access_control" type="collection"/>
@@ -1183,7 +1185,9 @@
             </argument>
             <argument type="service">
               <service class="Symfony\Component\Validator\Mapping\Loader\YamlFilesLoader" public="false">
-                <argument type="collection"/>
+                <argument type="collection">
+                  <argument>D:\WebServer\home\symfony2\src\Lezgro\Mobd2Bundle\Resources\config\validation.yml</argument>
+                </argument>
               </service>
             </argument>
           </argument>
@@ -2134,7 +2138,7 @@
     <service id="doctrine.orm.default_manager_configurator" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator">
       <argument type="collection"/>
     </service>
-    <service id="doctrine.orm.default_entity_manager" class="EM5093d6f3a89a0_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
+    <service id="doctrine.orm.default_entity_manager" class="EM509cf8364eca1_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
       <file>D:/WebServer/home/symfony2/app/cache/dev/jms_diextra/doctrine/EntityManager.php</file>
       <argument type="service">
         <service class="Doctrine\ORM\EntityManager" factory-method="create" public="false">
@@ -2143,7 +2147,7 @@
             <service class="Doctrine\ORM\Configuration" public="false">
               <call method="setEntityNamespaces">
                 <argument type="collection">
-                  <argument key="LezgroMobdBundle">Lezgro\MobdBundle\Entity</argument>
+                  <argument key="LezgroMobd2Bundle">Lezgro\Mobd2Bundle\Entity</argument>
                 </argument>
               </call>
               <call method="setMetadataCacheImpl">
@@ -2178,16 +2182,14 @@
                   <service class="Doctrine\ORM\Mapping\Driver\DriverChain" public="false">
                     <call method="addDriver">
                       <argument type="service">
-                        <service class="Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver" public="false">
+                        <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
+                          <argument type="service" id="annotation_reader"/>
                           <argument type="collection">
-                            <argument key="D:\WebServer\home\symfony2\src\Lezgro\MobdBundle\Resources\config\doctrine">Lezgro\MobdBundle\Entity</argument>
+                            <argument>D:\WebServer\home\symfony2\src\Lezgro\Mobd2Bundle\Entity</argument>
                           </argument>
-                          <call method="setGlobalBasename">
-                            <argument>mapping</argument>
-                          </call>
                         </service>
                       </argument>
-                      <argument>Lezgro\MobdBundle\Entity</argument>
+                      <argument>Lezgro\Mobd2Bundle\Entity</argument>
                     </call>
                   </service>
                 </argument>

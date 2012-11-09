@@ -1,5 +1,5 @@
 <?php
-
+//require_once __DIR__.'/../src/autoload.php';
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
@@ -20,7 +20,7 @@ class AppKernel extends Kernel
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new Application\HelloBundle\ApplicationHelloBundle(),
-            new Lezgro\MobdBundle\LezgroMobdBundle(),
+            new Lezgro\Mobd2Bundle\LezgroMobd2Bundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
